@@ -1,270 +1,398 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cer_of_edu" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="25a791db-7e8f-4e2f-9563-da80ef58b88c">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dsdev-CEN76-admin"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="ekpaidevomenoi" uuid="6f1889cc-1853-49a8-85d0-bb4eec0446d9">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dsdev-CEN76-admin"/>
+		<parameter name="inner_param" class="java.lang.Integer"/>
+		<queryString language="SQL">
+			<![CDATA[select date_format(sd.date, "%d/%m/%Y") as sem_date, p.protocol, e.surname, e.`name` as onoma, e.department, s.title
+from edu_employee as e
+INNER JOIN edu_participants as p on p.employee_id = e.id
+inner JOIN edu_seminar_dates as sd on sd.id = p.sem_date_id
+inner join edu_seminar as s on s.id = sd.sem_title_id
+where sd.id = $P{inner_param}]]>
+		</queryString>
+		<field name="sem_date" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="sem_date"/>
+		</field>
+		<field name="protocol" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="protocol"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="edu_participants"/>
+		</field>
+		<field name="surname" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="surname"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+		</field>
+		<field name="onoma" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="onoma"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+		</field>
+		<field name="department" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="department"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+		</field>
+		<field name="title" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="title"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="edu_seminar"/>
+		</field>
+	</subDataset>
+	<parameter name="edu_sem_date_param" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[]]>
+		<![CDATA[select e.`name` as onoma, e.surname, e.phone_num, e.email, sd.date AS sem_date, p.protocol
+from edu_employee as e
+INNER JOIN edu_participants as p on p.employee_id = e.id
+inner JOIN edu_seminar_dates as sd on sd.id = p.sem_date_id
+inner join edu_seminar as s on s.id = sd.sem_title_id
+where sd.id = $P{edu_sem_date_param}
+and p.officer_flag = 1]]>
 	</queryString>
-	<title>
-		<band height="385" splitType="Stretch">
-			<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="0" y="0" width="140" height="50" uuid="192e6d41-6c6f-4cbc-8f21-a0f881947384">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<imageExpression><![CDATA["/img/ed.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="0" y="50" width="250" height="20" uuid="ff7f575b-1290-482a-ab77-632f37e969b9">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="70" width="250" height="20" uuid="ff9476fa-a2da-436e-b124-81054fa27c0f">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ΥΠΟΥΡΓΕΙΟ ΑΓΡΟΤΙΚΗΣ ΑΝΑΠΤΥΞΗΣ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="90" width="250" height="20" uuid="75327b07-eb99-4561-a033-9d6489f3efc2">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ΚΑΙ ΤΡΟΦΙΜΩΝ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="110" width="250" height="20" uuid="594bc6cf-2184-4a65-b295-42a212c806d6">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ΓΕΝ. Δ/ΝΣΗ ΔΙΟΙΚΗΤΙΚΩΝ ΥΠΗΡΕΣΙΩΝ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="130" width="250" height="20" uuid="92887b9d-065b-4eef-a26c-af184c907a2e">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ΚΑΙ ΗΛΕΚΤΡΟΝΙΚΗΣ ΔΙΑΚΥΒΕΡΝΗΣΗΣ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="150" width="250" height="20" uuid="dc1062aa-9802-4d9f-a373-148dc6463420">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Δ/ΝΣΗ ΗΛΕΚΤΡΟΝΙΚΗΣ ΔΙΑΚΥΒΕΡΝΗΣΗΣ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="170" width="250" height="20" uuid="a3a3d4e5-779f-48eb-b8ed-223515c1a8c7">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ΤΜΗΜΑ ΑΝΑΠΤΥΞΗΣ ΠΛΗΡΟΦΟΡΙΑΚΩΝ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="190" width="250" height="20" uuid="46da324c-dd6a-4f9f-8b21-749d41dfc63a">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ΣΥΣΤΗΜΑΤΩΝ & ΨΗΦΙΑΚΩΝ ΥΠΗΡΕΣΙΩΝ]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="380" y="30" width="175" height="20" uuid="63fadb35-afb2-4800-82ac-8cf08aa29224">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Αθήνα, " + "DATE"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="380" y="50" width="175" height="20" uuid="96551ac7-4c60-41fa-9861-7fa181ea4b25">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Αριθ. Πρωτ.: " + "PROTOCOL"]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="230" width="80" height="20" uuid="7a96dcfb-e950-4b97-b377-2c954d7e5e71">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Ταχ. Δ/νση]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="250" width="80" height="20" uuid="80d44537-d28c-4fe0-a787-515b7c9dce66">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Πληροφορίες]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="270" width="80" height="20" uuid="9cdfedbf-1616-4c8d-8045-91a5a9241fde">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Τηλέφωνο]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="290" width="80" height="20" uuid="eadb7cdc-4d50-4e47-ac02-e6d7beb158c5">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Ηλ. Ταχυδρ.]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="80" y="230" width="170" height="20" uuid="3fceb852-9124-49e9-bfff-4acbdeb5bde2">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<textFieldExpression><![CDATA[": Αχαρνών 381"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="80" y="250" width="170" height="20" uuid="e49005dd-ab77-4132-b4fa-6db82aa6c71d">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<textFieldExpression><![CDATA[": " + "NAME" + "SURNAME"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="80" y="270" width="170" height="20" uuid="e2f0063b-af0a-4d8a-9f85-32d291f03c6e">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<textFieldExpression><![CDATA[": " + "TEL"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="80" y="290" width="170" height="20" uuid="a7efc3e7-64f7-49e4-a0f3-4100734d7349">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<textFieldExpression><![CDATA[": " + "E-MAIL"]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="30" y="360" width="490" height="20" uuid="9725ed53-4967-42c3-9229-c68362db583d">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+	<field name="onoma" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="onoma"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+	</field>
+	<field name="surname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="surname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+	</field>
+	<field name="phone_num" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="phone_num"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+	</field>
+	<field name="sem_date" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="sem_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_seminar_dates"/>
+	</field>
+	<field name="protocol" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="protocol"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_participants"/>
+	</field>
+	<columnHeader>
+		<band height="348">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="348" uuid="7d1e7f48-9472-4399-94d3-8d7bf25cb7f1">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<box>
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="14" isBold="true" isUnderline="false"/>
-				</textElement>
-				<text><![CDATA[Β Ε Β Α Ι Ω Σ Η    Ε Κ Π Α Ι Δ Ε Υ Σ Η Σ]]></text>
-			</staticText>
+				<image hAlign="Center" vAlign="Middle">
+					<reportElement x="0" y="0" width="140" height="50" uuid="52ed8f0c-1005-49f1-9edc-6288a9692a36">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<imageExpression><![CDATA["/img/ed.png"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="0" y="50" width="250" height="20" uuid="2d56de09-9c4d-4699-b605-d3ce02538613">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="70" width="250" height="20" uuid="c07978ac-c6d7-4d81-be41-e087492a995c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ΥΠΟΥΡΓΕΙΟ ΑΓΡΟΤΙΚΗΣ ΑΝΑΠΤΥΞΗΣ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="90" width="250" height="20" uuid="7fce5a94-1f77-47ab-83a9-dfebd57425a9">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ΚΑΙ ΤΡΟΦΙΜΩΝ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="110" width="250" height="20" uuid="3d020230-874a-4c4b-bd91-fd4ffffc59dd">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ΓΕΝ. Δ/ΝΣΗ ΔΙΟΙΚΗΤΙΚΩΝ ΥΠΗΡΕΣΙΩΝ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="130" width="250" height="20" uuid="9de3435f-d5f4-4e4d-ad30-55e3d23fd178">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ΚΑΙ ΗΛΕΚΤΡΟΝΙΚΗΣ ΔΙΑΚΥΒΕΡΝΗΣΗΣ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="150" width="250" height="20" uuid="7db794f3-83ab-4514-89d8-c9140c3a03c5">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Δ/ΝΣΗ ΗΛΕΚΤΡΟΝΙΚΗΣ ΔΙΑΚΥΒΕΡΝΗΣΗΣ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="170" width="250" height="20" uuid="12ed5555-22a4-48f8-b969-38564edbc05c">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ΤΜΗΜΑ ΑΝΑΠΤΥΞΗΣ ΠΛΗΡΟΦΟΡΙΑΚΩΝ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="190" width="250" height="20" uuid="ab93ba6a-8c19-4563-b70d-b3c6bb87c36d">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ΣΥΣΤΗΜΑΤΩΝ & ΨΗΦΙΑΚΩΝ ΥΠΗΡΕΣΙΩΝ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="380" y="30" width="175" height="20" uuid="87c89b83-17c1-43d8-888e-4d3709c2a5d6">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Αθήνα, " + DAY($F{sem_date}) + "/" + MONTH($F{sem_date}) + "/" + YEAR($F{sem_date})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="380" y="50" width="175" height="20" uuid="cd2d0992-4a81-4a62-8382-d71ddb431d70">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Αριθ. Πρωτ.: " + $F{protocol}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="225" width="80" height="20" uuid="3c7349da-694d-4589-98b7-500522d3789f">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Ταχ. Δ/νση]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="245" width="80" height="20" uuid="1ca0215e-fd3b-40e3-947a-96e747b91b71">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Πληροφορίες]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="265" width="80" height="20" uuid="8df3c7f9-e612-4608-a057-ca566d32c898">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Τηλέφωνο]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="285" width="80" height="20" uuid="9c9b805a-6b14-43e1-a0d7-d71f44100b07">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Ηλ. Ταχυδρ.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="80" y="225" width="170" height="20" uuid="978930d1-cc2d-40cb-9b3a-7be1c21dfbe4">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": Αχαρνών 381"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="80" y="245" width="170" height="20" uuid="a85b9c52-5a59-42b1-ad38-c5f0aeaa3901">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": " + $F{onoma} + " " + $F{surname}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="80" y="265" width="170" height="20" uuid="a791a288-57f7-4a04-83b0-d53e2527367f">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": " + $F{phone_num}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="80" y="285" width="170" height="20" uuid="7f807c71-011f-4c94-97e9-b78e04ea9e2c">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans"/>
+					</textElement>
+					<textFieldExpression><![CDATA[": " + $F{email}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="30" y="320" width="490" height="20" uuid="f640cf73-9297-45ec-90cc-57c9f047e6fc">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="14" isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Β Ε Β Α Ι Ω Σ Η    Ε Κ Π Α Ι Δ Ε Υ Σ Η Σ]]></text>
+				</staticText>
+			</frame>
 		</band>
-	</title>
+	</columnHeader>
 	<detail>
-		<band height="265" splitType="Stretch">
+		<band height="261" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			<textField textAdjust="StretchHeight">
-				<reportElement x="0" y="20" width="555" height="20" uuid="1331b989-9a59-4876-8479-0f9c164f6887">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="261" uuid="77fff783-2a2c-4c23-99fd-6601e1377cc1">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Justified">
-					<font fontName="DejaVu Sans" size="13"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Βεβαιώνεται ότι ο/η " + "NAME SURNAME" + "υπάλληλος της Υπηρεσιακής Μονάδας: " + "DIRECTORATE" + " παρακολούθησε/διεξήγαγε" + " σεμινάριο - εκπαίδευση χρηστών για την εφαρμογή: " + "SEMINAR" + " που πραγματοποιήθηκε στις " + "SEMINAR DATE" + " στις εγκαταστάσεις της Διεύθυνσης Ηλεκτρονικής Διακυβέρνησης του ΥΠΑΑΤ, Αχαρνών 381 & Δεστούνη 2, 4ος όροφος, Αθήνα."]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement positionType="Float" x="0" y="50" width="555" height="20" uuid="60987fe3-485e-44ac-9661-85d49370b4f5">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="13"/>
-				</textElement>
-				<text><![CDATA[Η βεβαίωση χορηγείται από στοιχεία που τηρούνται στην Υπηρεσία.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="280" y="160" width="275" height="20" uuid="d175e989-d0f3-400e-8e1f-dbe63800778f">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Ο ΠΡΟΪΣΤΑΜΕΝΟΣ ΔΙΕΥΘΥΝΣΗΣ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="280" y="240" width="275" height="20" uuid="5b1e1bc3-8a2a-4bca-883a-d0e33451da3d">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ΑΛΗΦΡΑΓΚΗΣ Δαμιανός]]></text>
-			</staticText>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ekpaidevomenoi" uuid="c28d2d90-eaa6-4117-b0b1-e284ab429a18">
+						<datasetParameter name="inner_param">
+							<datasetParameterExpression><![CDATA[$P{edu_sem_date_param}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="555" uuid="186107ef-6c8e-49f6-bf81-c4f3535f31c7">
+						<jr:detailCell style="Table_TD" height="240">
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<frame>
+								<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="555" height="240" uuid="1216be95-6b23-4d9f-8c24-2b76c52818ca">
+									<property name="com.jaspersoft.studio.unit.y" value="px"/>
+									<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								</reportElement>
+								<box padding="2"/>
+								<textField textAdjust="StretchHeight">
+									<reportElement x="0" y="0" width="550" height="20" uuid="80f1d869-1c02-41fa-ad12-1baa9bf6f7d8">
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+										<property name="com.jaspersoft.studio.unit.y" value="px"/>
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									</reportElement>
+									<textElement textAlignment="Justified">
+										<font fontName="DejaVu Sans" size="13"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Βεβαιώνεται ότι ο/η " + $F{onoma} + " " + $F{surname} + " υπάλληλος της Υπηρεσιακής Μονάδας: " + $F{department} + " παρακολούθησε/διεξήγαγε" + " σεμινάριο - εκπαίδευση χρηστών για την εφαρμογή: " + $F{title} + " που πραγματοποιήθηκε στις " + $F{sem_date} + " στις εγκαταστάσεις της Διεύθυνσης Ηλεκτρονικής Διακυβέρνησης του ΥΠΑΑΤ, Αχαρνών 381 & Δεστούνη 2, 4ος όροφος, Αθήνα."]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement positionType="Float" x="0" y="30" width="550" height="20" uuid="57773fde-a9fa-4c3b-8dde-098cd11d7ac2">
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									</reportElement>
+									<textElement verticalAlignment="Middle">
+										<font fontName="DejaVu Sans" size="13"/>
+									</textElement>
+									<text><![CDATA[Η βεβαίωση χορηγείται από στοιχεία που τηρούνται στην Υπηρεσία.]]></text>
+								</staticText>
+								<staticText>
+									<reportElement positionType="Float" x="250" y="140" width="275" height="20" uuid="112c9a59-9a63-4353-b5e6-460bd5649d1f">
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									</reportElement>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="DejaVu Sans" size="14" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Ο ΠΡΟΪΣΤΑΜΕΝΟΣ ΔΙΕΥΘΥΝΣΗΣ]]></text>
+								</staticText>
+								<staticText>
+									<reportElement positionType="Float" x="250" y="215" width="275" height="20" uuid="1341a29d-bd41-4695-bc4e-8884cb0e9fbc">
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									</reportElement>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="DejaVu Sans" size="14" isBold="true"/>
+									</textElement>
+									<text><![CDATA[ΑΛΗΦΡΑΓΚΗΣ Δαμιανός]]></text>
+								</staticText>
+							</frame>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="20">
-			<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			<textField>
-				<reportElement x="0" y="0" width="555" height="20" uuid="e1da6203-f754-4009-9183-07ddd99ee28c">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="DejaVu Sans" size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageFooter>
 </jasperReport>
