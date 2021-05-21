@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="trainees" pageWidth="565" pageHeight="842" columnWidth="525" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2dd3a96c-5ea8-4d26-a21b-94fc3aa196ec">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dsdev-CEN76-admin"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="edu_sem_date_inner_param" class="java.lang.Integer" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[select e.`name` as onoma, e.surname, e.phone_num, e.email, sd.date AS sem_date, p.protocol, e.department, s.title
+from edu_employee as e
+INNER JOIN edu_participants as p on p.employee_id = e.id
+inner JOIN edu_seminar_dates as sd on sd.id = p.sem_date_id
+inner join edu_seminar as s on s.id = sd.sem_title_id
+where sd.id = $P{edu_sem_date_inner_param}]]>
+	</queryString>
+	<field name="onoma" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="onoma"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+	</field>
+	<field name="surname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="surname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+	</field>
+	<field name="phone_num" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="phone_num"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+	</field>
+	<field name="sem_date" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="sem_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_seminar_dates"/>
+	</field>
+	<field name="protocol" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="protocol"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_participants"/>
+	</field>
+	<field name="department" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="department"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
+	</field>
+	<field name="title" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="title"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_seminar"/>
+	</field>
+	<sortField name="surname"/>
+	<detail>
+		<band height="250" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement stretchType="ElementGroupHeight" x="0" y="0" width="525" height="240" uuid="994a53db-0326-4ed7-8320-1f7ec5ff9bac">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textField textAdjust="StretchHeight">
+					<reportElement x="0" y="0" width="525" height="20" uuid="2f6086c5-14cb-4242-9253-693745af8116">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left">
+						<font fontName="DejaVu Sans" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Βεβαιώνεται ότι ο/η " + $F{onoma} + " " + $F{surname} + " υπάλληλος της Υπηρεσιακής Μονάδας: " + $F{department} + " παρακολούθησε/διεξήγαγε" + " σεμινάριο - εκπαίδευση χρηστών για την εφαρμογή: " + $F{title} + " που πραγματοποιήθηκε στις " + $F{sem_date} + " στις εγκαταστάσεις της Διεύθυνσης Ηλεκτρονικής Διακυβέρνησης του ΥΠΑΑΤ, Αχαρνών 381 & Δεστούνη 2, 4ος όροφος, Αθήνα."]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="30" width="525" height="20" uuid="3a147fdf-06b4-4141-ac83-3be4910e277e">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="13"/>
+					</textElement>
+					<text><![CDATA[Η βεβαίωση χορηγείται από στοιχεία που τηρούνται στην Υπηρεσία.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="250" y="140" width="275" height="20" uuid="96e03346-ab47-4414-9233-d9adb133d737">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ο ΠΡΟΪΣΤΑΜΕΝΟΣ ΔΙΕΥΘΥΝΣΗΣ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="250" y="220" width="275" height="20" uuid="69d0b1aa-3348-4ae5-ae79-191474de9ea2">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ΑΛΗΦΡΑΓΚΗΣ Δαμιανός]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

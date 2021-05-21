@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>dsdev-CEN76-admin</name><driver>com.mysql.jdbc.Driver</driver><username>app</username><password>app</password><savePassword>true</savePassword><url>jdbc:mysql://dsdev-cen76.minagric.local/as4admin</url><database></database><serverAddress></serverAddress><classpath>C:\Users\user\OneDrive\Έγγραφα\ΥπΑΑΤ\Jasper\mysql-connector-java-5.1.23-bin.jar</classpath></jdbcDataAdapter>
