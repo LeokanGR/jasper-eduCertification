@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.0  -->
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.12.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cer_of_edu" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="25a791db-7e8f-4e2f-9563-da80ef58b88c">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="dsdev-CEN76-admin"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -34,7 +34,7 @@
 	inner join edu_seminar as s on s.id = sd.sem_title_id
 	where sd.id = $P{edu_sem_date_param}
 	and p.officer_flag = 1) as email_ekpaideftis, 
-	(select date_format(sd.date, "%d/%m/%Y")
+	(select sd.date
 	from edu_employee as e
 	INNER JOIN edu_participants as p on p.employee_id = e.id
 	inner JOIN edu_seminar_dates as sd on sd.id = p.sem_date_id
@@ -45,7 +45,8 @@
 	e.surname,
 	e.phone_num,
 	e.email,
-	date_format(sd.date, "%d/%m/%Y") AS sem_date, 
+	sd.date AS sem_date, 
+	sd.date_end AS sem_date_end, 
 	p.protocol,
 	e.department,
 	s.title
@@ -53,52 +54,70 @@ from edu_employee as e
 INNER JOIN edu_participants as p on p.employee_id = e.id
 inner JOIN edu_seminar_dates as sd on sd.id = p.sem_date_id
 inner join edu_seminar as s on s.id = sd.sem_title_id
-where sd.id = $P{edu_sem_date_param}]]>
+where sd.id = $P{edu_sem_date_param}  AND p.attendance = true]]>
 	</queryString>
 	<field name="onoma_ekpaideftis" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="onoma_ekpaideftis"/>
 		<property name="com.jaspersoft.studio.field.label" value="onoma_ekpaideftis"/>
 	</field>
 	<field name="surname_ekpaideftis" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="surname_ekpaideftis"/>
 		<property name="com.jaspersoft.studio.field.label" value="surname_ekpaideftis"/>
 	</field>
 	<field name="phone_num_ekpaideftis" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="phone_num_ekpaideftis"/>
 		<property name="com.jaspersoft.studio.field.label" value="phone_num_ekpaideftis"/>
 	</field>
 	<field name="email_ekpaideftis" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email_ekpaideftis"/>
 		<property name="com.jaspersoft.studio.field.label" value="email_ekpaideftis"/>
 	</field>
-	<field name="sem_date_ekpaideftis" class="java.lang.String">
+	<field name="sem_date_ekpaideftis" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="sem_date_ekpaideftis"/>
 		<property name="com.jaspersoft.studio.field.label" value="sem_date_ekpaideftis"/>
 	</field>
 	<field name="onoma" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
 		<property name="com.jaspersoft.studio.field.label" value="onoma"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
 	</field>
 	<field name="surname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="surname"/>
 		<property name="com.jaspersoft.studio.field.label" value="surname"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
 	</field>
 	<field name="phone_num" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="phone_num"/>
 		<property name="com.jaspersoft.studio.field.label" value="phone_num"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
 	</field>
 	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
 		<property name="com.jaspersoft.studio.field.label" value="email"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
 	</field>
-	<field name="sem_date" class="java.lang.String">
+	<field name="sem_date" class="java.util.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date"/>
 		<property name="com.jaspersoft.studio.field.label" value="sem_date"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_seminar_dates"/>
 	</field>
+	<field name="sem_date_end" class="java.util.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date_end"/>
+		<property name="com.jaspersoft.studio.field.label" value="sem_date_end"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="edu_seminar_dates"/>
+	</field>
 	<field name="protocol" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="protocol"/>
 		<property name="com.jaspersoft.studio.field.label" value="protocol"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_participants"/>
 	</field>
 	<field name="department" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="department"/>
 		<property name="com.jaspersoft.studio.field.label" value="department"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
 	</field>
 	<field name="title" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="title"/>
 		<property name="com.jaspersoft.studio.field.label" value="title"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_seminar"/>
 	</field>
@@ -204,7 +223,7 @@ where sd.id = $P{edu_sem_date_param}]]>
 					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Sans"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Αθήνα, " + DAY($F{sem_date}) + "/" + MONTH($F{sem_date}) + "/" + YEAR($F{sem_date})]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Αθήνα, " + DAY($F{sem_date_end}) + "/" + MONTH($F{sem_date_end}) + "/" + YEAR($F{sem_date_end})]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="380" y="50" width="175" height="20" uuid="b8cc26d8-b75a-4816-b2a6-6cf0389734e2">
@@ -326,10 +345,10 @@ where sd.id = $P{edu_sem_date_param}]]>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
-					<textElement textAlignment="Justified">
+					<textElement textAlignment="Justified" markup="html">
 						<font fontName="DejaVu Sans" size="13"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Βεβαιώνεται ότι ο/η " + $F{onoma} + " " + $F{surname} + " υπάλληλος της Υπηρεσιακής Μονάδας: " + $F{department} + " παρακολούθησε/διεξήγαγε" + " σεμινάριο - εκπαίδευση χρηστών για την εφαρμογή: " + $F{title} + " που πραγματοποιήθηκε στις " + $F{sem_date} + " στις εγκαταστάσεις της Διεύθυνσης Ηλεκτρονικής Διακυβέρνησης του ΥΠΑΑΤ, Αχαρνών 381 & Δεστούνη 2, 4ος όροφος, Αθήνα."]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Βεβαιώνεται ότι ο/η <b>" + $F{onoma} + " " + $F{surname} + "</b> υπάλληλος της Υπηρεσιακής Μονάδας: " + $F{department} + " παρακολούθησε/διεξήγαγε" + " σεμινάριο - εκπαίδευση χρηστών για την εφαρμογή: <b>" + $F{title} + "</b> που πραγματοποιήθηκε στις " + DAY($F{sem_date}) + "/" + MONTH($F{sem_date}) + "/" + YEAR($F{sem_date}) + " στις εγκαταστάσεις της Διεύθυνσης Ηλεκτρονικής Διακυβέρνησης του ΥΠΑΑΤ, Αχαρνών 381 & Δεστούνη 2, 4ος όροφος, Αθήνα."]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement positionType="Float" x="0" y="30" width="550" height="20" uuid="37462d08-94a6-469c-ac20-a308140a7e35">
