@@ -96,12 +96,12 @@ where sd.id = $P{edu_sem_date_param}  AND p.attendance = true]]>
 		<property name="com.jaspersoft.studio.field.label" value="email"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_employee"/>
 	</field>
-	<field name="sem_date" class="java.util.Date">
+	<field name="sem_date" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.name" value="date"/>
 		<property name="com.jaspersoft.studio.field.label" value="sem_date"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_seminar_dates"/>
 	</field>
-	<field name="sem_date_end" class="java.util.Date">
+	<field name="sem_date_end" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.name" value="date_end"/>
 		<property name="com.jaspersoft.studio.field.label" value="sem_date_end"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="edu_seminar_dates"/>
@@ -236,17 +236,7 @@ where sd.id = $P{edu_sem_date_param}  AND p.attendance = true]]>
 					<textFieldExpression><![CDATA["Αριθ. Πρωτ.: " + $F{protocol}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="0" y="225" width="80" height="20" uuid="771462d6-e3b8-4b6a-ad50-5157aaa0227a">
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-						<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					</reportElement>
-					<textElement verticalAlignment="Middle">
-						<font fontName="DejaVu Sans" isBold="false"/>
-					</textElement>
-					<text><![CDATA[Ταχ. Δ/νση]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="0" y="245" width="80" height="20" uuid="4bdaf7eb-16e6-41d3-bc63-8066cb42deb3">
+					<reportElement x="0" y="230" width="80" height="20" uuid="4bdaf7eb-16e6-41d3-bc63-8066cb42deb3">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
@@ -256,7 +246,7 @@ where sd.id = $P{edu_sem_date_param}  AND p.attendance = true]]>
 					<text><![CDATA[Πληροφορίες]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="0" y="265" width="80" height="20" uuid="16e14fef-77b2-4a12-aae3-6cddafede02e">
+					<reportElement x="0" y="250" width="80" height="20" uuid="16e14fef-77b2-4a12-aae3-6cddafede02e">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
@@ -266,7 +256,7 @@ where sd.id = $P{edu_sem_date_param}  AND p.attendance = true]]>
 					<text><![CDATA[Τηλέφωνο]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="0" y="285" width="80" height="20" uuid="6afe7754-06c7-46e5-99fd-4b92dfb5ba4f">
+					<reportElement x="0" y="270" width="80" height="20" uuid="6afe7754-06c7-46e5-99fd-4b92dfb5ba4f">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
@@ -276,17 +266,7 @@ where sd.id = $P{edu_sem_date_param}  AND p.attendance = true]]>
 					<text><![CDATA[Ηλ. Ταχυδρ.]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="80" y="225" width="170" height="20" uuid="75330376-afed-46b5-bf39-f6d69f3e3503">
-						<property name="com.jaspersoft.studio.unit.y" value="px"/>
-						<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					</reportElement>
-					<textElement verticalAlignment="Middle">
-						<font fontName="DejaVu Sans"/>
-					</textElement>
-					<textFieldExpression><![CDATA[": Αχαρνών 381"]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="80" y="245" width="170" height="20" uuid="7c573ddd-a6a8-4093-aae9-364a4624288f">
+					<reportElement x="80" y="230" width="170" height="20" uuid="7c573ddd-a6a8-4093-aae9-364a4624288f">
 						<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -296,7 +276,7 @@ where sd.id = $P{edu_sem_date_param}  AND p.attendance = true]]>
 					<textFieldExpression><![CDATA[": " + $F{onoma_ekpaideftis} + " " + $F{surname_ekpaideftis}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="80" y="265" width="170" height="20" uuid="631e4aac-b0b9-4bcd-a4ce-2944d0368f1d">
+					<reportElement x="80" y="250" width="170" height="20" uuid="631e4aac-b0b9-4bcd-a4ce-2944d0368f1d">
 						<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
@@ -306,7 +286,7 @@ where sd.id = $P{edu_sem_date_param}  AND p.attendance = true]]>
 					<textFieldExpression><![CDATA[": " + $F{phone_num_ekpaideftis}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="80" y="285" width="170" height="20" uuid="6552fb4a-e4d8-4f78-9ca8-8f4df7f162c6">
+					<reportElement x="80" y="270" width="170" height="20" uuid="6552fb4a-e4d8-4f78-9ca8-8f4df7f162c6">
 						<property name="com.jaspersoft.studio.unit.y" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
